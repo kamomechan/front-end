@@ -1,12 +1,41 @@
 /* 整个结构为规则集 */
 /* 选择器 selector 指定要添加样式的元素 */
-p {
+/* 多个元素用逗号隔开 */
+/* 选择器的分类
+   1.元素选择器 p选择<p>
+   2.ID选择器 id只能定义一个元素 #my-id选择<a id="my-id">
+   3.类选择器 class可以定义多个元素 .my-class选择<a class="my-class"
+   4.属性选择器 选择具有对应属性的元素 img[src]选择<img src="my-image">而不是<img>
+   5.伪类选择器 选择特定状态下的特定元素 a:hover选择仅在鼠标指针悬停在链接上时的<a>元素 */
+p,
+h1,
+li {
     /* 声明 declaration 一条单独的规则，指定为元素的哪个属性添加样式 */
     /* color 属性 properties; red 属性值 property-value */
     /* 每个声明之间用分号隔开;
-       属性和属性值之间用冒号隔开;
-       属性值和属性值之间用空格隔开 */
-    color: red;
-    width: 500px;
-    border: 1px solid black;
+       属性和属性值之间用冒号隔开; */
+    color: brown;
+}
+
+html {
+    /* 设置字体和大小 */
+    font-size: 10px;
+    /* px 表示“像素（pixel）”: 基础字号为 10 像素 */
+    font-family:
+        "Open Sans", sans-serif;
+    /* 这应该是你从 Google Fonts 得到的其余输出。 */
+}
+
+h1 {
+    /* 设置标题大小并居中对齐 */
+    font-size: 60px;
+    text-align: center;
+}
+
+p,
+li {
+    /* 设置字体大小，行高和字间距 */
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 1px;
 }
