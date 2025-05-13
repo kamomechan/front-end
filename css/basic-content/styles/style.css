@@ -1,7 +1,12 @@
 /* 整个结构为规则集 */
 /* 选择器 selector 指定要添加样式的元素 */
 p {
-    /* 声明 declaration 一条单独的规则，指定为元素的哪个属性添加样式*/
+    /* 声明 declaration 一条单独的规则，指定为元素的哪个属性添加样式 */
     /* color 属性 properties; red 属性值 property-value */
+    /* 每个声明之间用分号隔开;
+       属性和属性值之间用冒号隔开;
+       属性值和属性值之间用空格隔开 */
     color: red;
+    width: 500px;
+    border: 1px solid black;
 }
