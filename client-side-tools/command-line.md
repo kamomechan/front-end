@@ -66,6 +66,7 @@ a.txt    b.txt
 ```bash
 a.txt
 b.txt
+
 ```
 
 由此可知，标准输出会优化显示结果，在一行内显示多个文件名，以便我们眼睛查看。而经过管道连接符转成标准输入后，则会把文件之间换行显示，以便通过 `wc -l` 获取行数从而得到文件个数
@@ -164,11 +165,11 @@ npm install --global prettier
 
 ```javascript
 const myObj = {
-  a: 1,
-  b: { c: 2 },
+a: 1,
+b: { c: 2 },
 };
 function printMe(obj) {
-  console.log(obj.b.c);
+console.log(obj.b.c);
 }
 printMe(myObj);
 ```
@@ -204,7 +205,6 @@ function printMe(obj) {
   console.log(obj.b.c);
 }
 printMe(myObj);
-
 ```
 
 prettier 有很多自动化的方法，推荐使用 [vscode-prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) 插件的方式来进行，当我们保存时会自动格式化
