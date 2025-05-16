@@ -70,4 +70,36 @@ b.txt
 
 由此可知，标准输出会优化显示结果，在一行内显示多个文件名，以便我们眼睛查看。而经过管道连接符转成标准输入后，则会把文件之间换行显示，以便通过 `wc -l` 获取行数从而得到文件个数
 
+## 一个稍微复杂的例子
+
+`curl` 命令可以获取页面的内容，可选参数有 `-L` 跟随服务器重定向，`-I` 只获取响应头(HEAD请求) 等等
+
+```bash
+curl -L -I https://developer.mozilla.org/docs/Web/API/fetch | grep location
+```
+
+根据筛选 location头(重定向目标) 我们可以获取重定向的信息
+
+```bash
+location: /en-US/docs/Web/API/fetch
+location: /en-US/docs/Web/API/Window/fetch
+```
+
+为了使链接更加完善，我们可以使用 `awk` 命令进行拼接
+
+```bash
+curl -L -I https://developer.mozilla.org/docs/Web/API/fetch | grep location | awk '{print "https://developer.mozilla.org" $2}'
+```
+
+`awk` 命令中 `$2` 表示标准输入中的第二列，即`/en-US/docs/Web/API/Window/fetch` ,而第一列则是 `location:` ，整体意思则为将打印 `https://developer.mozilla.org`  和 `/en-US/docs/Web/API/Window/fetch` 拼接的结果
+
+输出结果为
+
+```bash
+https://developer.mozilla.org/en-US/docs/Web/API/fetch
+https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
+```
+
+## 添加工具
+
 
