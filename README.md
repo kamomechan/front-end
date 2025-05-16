@@ -14,6 +14,8 @@
 
 [客户端工具概览](https://kamomechan.github.io/front-end/client-side-tools/overview)
 
+[命令行](https://kamomechan.github.io/front-end/client-side-tools/command-line)
+
 ## 进阶内容
 
 loading...
