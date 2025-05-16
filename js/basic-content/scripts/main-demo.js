@@ -8,8 +8,8 @@ myHeading.textContent = "Hello world!";
 // 声明变量用 let + 变量名
 let myVariable;
 // 变量可以进行赋值或更改
-myVariable=1;
-myVariable=2;
+myVariable = 1;
+myVariable = 2;
 // console.log()函数用于在控制台输出打印
 console.log(myVariable);
 
@@ -31,9 +31,9 @@ console.log(myVariable);
 let iceCream = "chocolate";
 // if()括号中是一个表达式。如果为true，则运行第一个代码块;如果为false，则运行else关键字后面第二个代码块
 if (iceCream === "chocolate") {
-    alert("我最喜欢巧克力冰淇淋了！");
+  alert("我最喜欢巧克力冰淇淋了！");
 } else {
-    alert("但是巧克力才是我的最爱呀……");
+  alert("但是巧克力才是我的最爱呀……");
 }
 
 // 函数 (将重复使用的功能封装起来的方式，避免重复书写代码)
@@ -44,10 +44,10 @@ if (iceCream === "chocolate") {
 // 定义函数
 // function + 函数名 (参数...){}
 // 这里定义一个函数用来处理两个数值的乘积
-function multiply (num1,num2){
-    let result = num1 * num2;
-    // return 将值返回到函数的外面，因为函数内的变量只能在函数内使用，这叫做变量的作用域
-    return result;
+function multiply(num1, num2) {
+  let result = num1 * num2;
+  // return 将值返回到函数的外面，因为函数内的变量只能在函数内使用，这叫做变量的作用域
+  return result;
 }
 
 console.log(multiply(3, 4));
@@ -58,11 +58,10 @@ console.log(multiply(3, 5));
 
 // 点击事件
 // addEventListener事件监听函数，第一个参数是事件名称，第二个参数是处理事件的函数
-document.querySelector("html").addEventListener("click",function(){
-    alert("别戳我，我怕疼");
+document.querySelector("html").addEventListener("click", function () {
+  alert("别戳我，我怕疼");
 });
 // 由于刚刚传递给事件函数的函数没有名称，于是叫匿名函数，也可以用 "() =>" 表示，又称箭头函数
 document.querySelector("html").addEventListener("click", () => {
-    alert("别戳我，我怕疼");
+  alert("别戳我，我怕疼");
 });
-
