@@ -66,7 +66,6 @@ a.txt    b.txt
 ```bash
 a.txt
 b.txt
-
 ```
 
 由此可知，标准输出会优化显示结果，在一行内显示多个文件名，以便我们眼睛查看。而经过管道连接符转成标准输入后，则会把文件之间换行显示，以便通过 `wc -l` 获取行数从而得到文件个数
@@ -210,3 +209,54 @@ printMe(myObj);
 prettier 有很多自动化的方法，推荐使用 [vscode-prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) 插件的方式来进行，当我们保存时会自动格式化
 
 ## 尝试其他的工具
+
+- [`bat`](https://github.com/sharkdp/bat) — 一个更好的 `cat`， (`cat` 用于打印文件内容）。
+- [`prettyping`](http://denilson.sa.nom.br/prettyping/) — `ping`在命令行上，但是是可视化的 (ping 是检查服务器是否有响应的有用工具)。
+- [`htop`](http://hisham.hm/htop/) —进程查看器，当某些东西使你的 CPU 风扇的行为像一个喷气发动机，并且你想要识别出错的程序时，它非常有用。
+- [`tldr`](https://tldr.sh/#installation) —在本章前面提到的，但是可以作为命令行工具使用。
+
+--- 
+
+**环境变量**
+
+根据文档安装后有时可能会无法直接使用命令，通常打开应用程序时需要找到对应的路径才能打开，命令也是如此，为了不让每次输入命令时都包含路径，于是便诞生了环境变量(PATH)
+
+**如何查看 `PATH`**
+
+```bash
+echo $PATH
+```
+
+**如何修改 `PATH`**
+
+```bash
+export PATH=$PATH:your-path
+```
+
+把 `your-path` 替换成命令所在的目录即可
+
+然后运行
+
+```bash
+source ~/.bashrc  # 或 source ~/.zshrc
+```
+
+**如何修改命令名称**
+
+当我们在 Ubuntu 上利用 apt 安装 bat 时会发现，不能通过 `bat` 命令直接使用（会显示没有此命令），而通过 `batcat` 命令才能使用
+
+这时候我们可以利用软链接(相当于快捷方式)给 `batcat` 命令取个别名为 `bat` 
+
+```bash
+mkdir -p ~/.local/bin
+ln -s /usr/bin/batcat ~/.local/bin/bat
+```
+
+然后把软链接存放的目录添加到环境变量就可以啦
+
+```bash
+export PATH=$PATH:~/.local/bin/bat
+source ~/.bashrc
+```
+
+
