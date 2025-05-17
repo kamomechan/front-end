@@ -2,9 +2,9 @@
 
 ## 终端与命令行
 
-终端包括打开shell后的会话和会话窗口，而命令行则只包括你输入的命令和闪烁的光标。
+终端包括打开 shell 后的会话和会话窗口，而命令行则只包括你输入的命令和闪烁的光标。
 
-macOS 和 Linux 的终端都是基于unix的，而 Windows 的 cmd 则相当于老式的 DOS 提示符，相当于 unix 缺少了很多功能，建议使用 wsl 来替代，可以直接在微软商店免费安装
+macOS 和 Linux 的终端都是基于 unix 的，而 Windows 的 cmd 则相当于老式的 DOS 提示符，相当于 unix 缺少了很多功能，建议使用 wsl 来替代，可以直接在微软商店免费安装
 
 ## 基本的内置终端命令
 
@@ -45,7 +45,7 @@ macOS 和 Linux 的终端都是基于unix的，而 Windows 的 cmd 则相当于�
 ls | wc -l
 ```
 
-这是怎么回事呢？我们在使用管道连接符时，把标准输出打印 `stdout` 转成了 标准输入 `stdin` ，而  `wc` 命令则接收到了 `ls` 命令的标准输入
+这是怎么回事呢？我们在使用管道连接符时，把标准输出打印 `stdout` 转成了 标准输入 `stdin` ，而 `wc` 命令则接收到了 `ls` 命令的标准输入
 
 那为何能显示文件个数呢？
 
@@ -72,13 +72,13 @@ b.txt
 
 ## 一个稍微复杂的例子
 
-`curl` 命令可以获取页面的内容，可选参数有 `-L` 跟随服务器重定向，`-I` 只获取响应头(HEAD请求) 等等
+`curl` 命令可以获取页面的内容，可选参数有 `-L` 跟随服务器重定向，`-I` 只获取响应头(HEAD 请求) 等等
 
 ```bash
 curl -L -I https://developer.mozilla.org/docs/Web/API/fetch | grep location
 ```
 
-根据筛选 location头(重定向目标) 我们可以获取重定向的信息
+根据筛选 location 头(重定向目标) 我们可以获取重定向的信息
 
 ```bash
 location: /en-US/docs/Web/API/fetch
@@ -91,7 +91,7 @@ location: /en-US/docs/Web/API/Window/fetch
 curl -L -I https://developer.mozilla.org/docs/Web/API/fetch | grep location | awk '{print "https://developer.mozilla.org" $2}'
 ```
 
-`awk` 命令中 `$2` 表示标准输入中的第二列，即`/en-US/docs/Web/API/Window/fetch` ,而第一列则是 `location:` ，整体意思则为将打印 `https://developer.mozilla.org`  和 `/en-US/docs/Web/API/Window/fetch` 拼接的结果
+`awk` 命令中 `$2` 表示标准输入中的第二列，即`/en-US/docs/Web/API/Window/fetch` ,而第一列则是 `location:` ，整体意思则为将打印 `https://developer.mozilla.org` 和 `/en-US/docs/Web/API/Window/fetch` 拼接的结果
 
 输出结果为
 
@@ -102,17 +102,17 @@ https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
 
 ## 添加工具
 
-[**node.js**](https://nodejs.org/en/) 一个能让JavaScript在电脑上运行的环境(本来只能在浏览器运行)
+[**node.js**](https://nodejs.org/en/) 一个能让 JavaScript 在电脑上运行的环境(本来只能在浏览器运行)
 
 **npm** 是 node.js 自带的“应用商店”，专门用来安装前端开发工具(框架，插件等)
 
-装Node.js时会自动带上npm和npx（npm的小助手），不用单独折腾。
+装 Node.js 时会自动带上 npm 和 npx（npm 的小助手），不用单独折腾。
 
 ---
 
 **prettier** 是前端代码格式化工具，专注于基于 javascript 的语言，并增加了对 HTML、CSS、SCSS、JSON 等的支持
 
-利用 npm 安装prettier 时，如何安装呢？
+利用 npm 安装 prettier 时，如何安装呢？
 
 可以选择 **全局安装** 或 **本地安装**,以下是全局安装的优缺点
 
@@ -156,7 +156,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
 npm install --global prettier
 ```
 
-命令完成后，prettier可以在系统任意位置使用，直接输入 `prettier` 不加任何参数运行，会和其他命令一样显示帮助和提示
+命令完成后，prettier 可以在系统任意位置使用，直接输入 `prettier` 不加任何参数运行，会和其他命令一样显示帮助和提示
 
 **尝试 prettier**
 
@@ -275,7 +275,7 @@ source ~/.bashrc
 
 1 = 可执行
 
-一般常用执行文件使用 755,第一个数字到第三个数字分别代表所有者(owner)，同组用户(group),其他用户(other)。由于7=4+2+1，所以所有者用户拥有可读，写，执行权限；由于4+1=5,所以同组用户和其他用户拥有可读，执行权限
+一般常用执行文件使用 755,第一个数字到第三个数字分别代表所有者(owner)，同组用户(group),其他用户(other)。由于 7=4+2+1，所以所有者用户拥有可读，写，执行权限；由于 4+1=5,所以同组用户和其他用户拥有可读，执行权限
 
 ```bash
 chmod 755 filename
@@ -283,7 +283,7 @@ chmod 755 filename
 
 ---
 
-**从源代码安装htop**
+**从源代码安装 htop**
 
 1. `wget` 是一个命令行下载工具，可用来下载源代码包
    
@@ -307,7 +307,7 @@ chmod 755 filename
    
    - `J`：处理 xz 压缩（文件名是 .tar.xz 时用）
    
-   常用到的选项是 `-xvf` ，这是由于tar命令会自动检测文件类型，也就不需要指定类型啦
+   常用到的选项是 `-xvf` ，这是由于 tar 命令会自动检测文件类型，也就不需要指定类型啦
    
    ```bash
    tar -xvf htop-3.4.1.tar.xz
@@ -331,7 +331,7 @@ chmod 755 filename
    
    - `sudo make install` 安装到系统，把编译好的程序"搬"到系统的标准目录（如 /usr/local/bin），以便可以直接通过命令运行，而不用输入路径。由于需要管理员权限所以加 `sudo`
    
-   **小技巧**：`make -j4` 可以让编译更快（使用4个CPU核心同时编译，数字可根据你CPU核心数调整）
+   **小技巧**：`make -j4` 可以让编译更快（使用 4 个 CPU 核心同时编译，数字可根据你 CPU 核心数调整）
    
    ```bash
    ./autogen.sh && ./configure && make && sudo make install
