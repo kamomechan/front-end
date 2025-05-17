@@ -227,6 +227,10 @@ prettier 有很多自动化的方法，推荐使用 [vscode-prettier](https://ma
 echo $PATH
 ```
 
+一般系统会内置以下路径并添加到环境变量
+
+`/usr/bin` `/usr/local/bin`
+
 **如何修改 `PATH`**
 
 ```bash
@@ -276,5 +280,67 @@ source ~/.bashrc
 ```bash
 chmod 755 filename
 ```
+
+---
+
+**从源代码安装htop**
+
+1.  `wget` 是一个命令行下载工具，可用来下载源代码包
+   
+   - `-O` 下载后重命名文件
+   
+   - `-c` 如果下载中断了，可以继续下载(断点续传)
+   
+   ```bash
+    wget https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz
+   ```
+
+2.  `tar` 是一个命令行解压工具
+   
+   - `x`：解压（eXtract）
+   
+   - `v`：显示解压过程（Verbose，让你看到正在解压哪些文件）
+   
+   - `f`：指定文件名（File）
+   
+   - `z`：处理 gzip 压缩（文件名是 .tar.gz 时用）
+   
+   - `J`：处理 xz 压缩（文件名是 .tar.xz 时用）
+   
+   常用到的选项是 `-xvf` ，这是由于tar命令会自动检测文件类型，也就不需要指定类型啦
+   
+   ```bash
+   tar -xvf htop-3.4.1.tar.xz
+   ```
+
+3. 下载依赖
+   
+   [开发文档](https://github.com/htop-dev/htop?tab=readme-ov-file#prerequisite) 有对应系统所需的依赖项，这里以 Debian/Ubuntu 为例
+   
+   ```bash
+   sudo apt install libncursesw5-dev autotools-dev autoconf automake build-essential
+   ```
+
+4. 编译安装四部曲
+   
+   - `./autogen.sh` 检查是否有 `configure`脚本，如果没有则生成一个
+   
+   - `./configure` 检查环境，检查系统是否具备编译所需的一切条件(依赖)
+   
+   - `make` 编译，把源代码转换成电脑能直接运行的二进制文件
+   
+   - `sudo make install` 安装到系统，把编译好的程序"搬"到系统的标准目录（如 /usr/local/bin），以便可以直接通过命令运行，而不用输入路径。由于需要管理员权限所以加 `sudo`
+   
+   **小技巧**：`make -j4` 可以让编译更快（使用4个CPU核心同时编译，数字可根据你CPU核心数调整）
+   
+   ```bash
+   ./autogen.sh && ./configure && make && sudo make install
+   ```
+   
+   `&&` 表示"只有前一个命令成功，才执行下一个
+   
+   
+   
+   
 
 
