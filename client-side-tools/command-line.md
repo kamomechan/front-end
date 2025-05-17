@@ -215,7 +215,7 @@ prettier 有很多自动化的方法，推荐使用 [vscode-prettier](https://ma
 - [`htop`](http://hisham.hm/htop/) —进程查看器，当某些东西使你的 CPU 风扇的行为像一个喷气发动机，并且你想要识别出错的程序时，它非常有用。
 - [`tldr`](https://tldr.sh/#installation) —在本章前面提到的，但是可以作为命令行工具使用。
 
---- 
+---
 
 **环境变量**
 
@@ -249,7 +249,7 @@ source ~/.bashrc  # 或 source ~/.zshrc
 
 当我们在 Ubuntu 上利用 apt 安装 bat 时会发现，不能通过 `bat` 命令直接使用（会显示没有此命令），而通过 `batcat` 命令才能使用
 
-这时候我们可以利用软链接(相当于快捷方式)给 `batcat` 命令取个别名为 `bat` 
+这时候我们可以利用软链接(相当于快捷方式)给 `batcat` 命令取个别名为 `bat`
 
 ```bash
 mkdir -p ~/.local/bin
@@ -285,17 +285,17 @@ chmod 755 filename
 
 **从源代码安装htop**
 
-1.  `wget` 是一个命令行下载工具，可用来下载源代码包
+1. `wget` 是一个命令行下载工具，可用来下载源代码包
    
    - `-O` 下载后重命名文件
    
    - `-c` 如果下载中断了，可以继续下载(断点续传)
    
    ```bash
-    wget https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz
+   wget https://github.com/htop-dev/htop/releases/download/3.4.1/htop-3.4.1.tar.xz
    ```
 
-2.  `tar` 是一个命令行解压工具
+2. `tar` 是一个命令行解压工具
    
    - `x`：解压（eXtract）
    
@@ -338,9 +338,3 @@ chmod 755 filename
    ```
    
    `&&` 表示"只有前一个命令成功，才执行下一个
-   
-   
-   
-   
-
-
