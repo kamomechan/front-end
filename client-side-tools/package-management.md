@@ -27,22 +27,16 @@
 
 此外，软件包管理器还可以处理重复的依赖项
 
-npm (基于JavaScript和node的包管理器)，可以选择全局安装或本地安装，但由于本地安装具有 **可移植性** 与 **可锁定依赖版本**，因此更推荐。比如一个项目依赖webpack包，并且让其他用户也能运行这个项目，如果依赖是以本地安装的形式配置的，那么就不用担心版本不兼容的问题
+npm (基于 JavaScript 和 node 的包管理器)，可以选择全局安装或本地安装，但由于本地安装具有 **可移植性** 与 **可锁定依赖版本**，因此更推荐。比如一个项目依赖 webpack 包，并且让其他用户也能运行这个项目，如果依赖是以本地安装的形式配置的，那么就不用担心版本不兼容的问题
 
 > **备注：** npm 不是唯一可用的软件包管理器。有一种成功和流行的替代软件包管理器是 [Yarn](https://yarnpkg.com/)。Yarn 使用不同的算法解决依赖项，这可能意味着更快的用户体验。还有一些其他新兴的客户端，例如 [pnpm](https://pnpm.js.org/)。
 
 ## 软件包仓库
 
-软件包管理器是通过软件包仓库进行下载依赖的，也可以在软件包仓库发布自己的依赖，npm作为一个软件包管理器，同时也是JavaScript最常用的软件包仓库，npm 仓库位于 [npmjs.com](https://www.npmjs.com/)
+软件包管理器是通过软件包仓库进行下载依赖的，也可以在软件包仓库发布自己的依赖，npm 作为一个软件包管理器，同时也是 JavaScript 最常用的软件包仓库，npm 仓库位于 [npmjs.com](https://www.npmjs.com/)
 
-npm不是唯一的选择，你也可以通过[Microsoft Azure](https://azure.microsoft.com/) 管理自己的npm代理仓库(因此可以覆盖或锁定某些软件包)，[GitHub 也提供软件包仓库服务](https://github.com/features/packages)
+npm 不是唯一的选择，你也可以通过[Microsoft Azure](https://azure.microsoft.com/) 管理自己的 npm 代理仓库(因此可以覆盖或锁定某些软件包)，[GitHub 也提供软件包仓库服务](https://github.com/features/packages)
 
 ## 使用软件包生态系统
 
 [Parcel](https://parceljs.org/) 是开发阶段常用到的一个命令行工具，可以监测我们的代码以查找对依赖的调用，并自动安装对应的依赖。它还可以自动构建我们的代码
-
-
-
-
-
-
