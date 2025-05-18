@@ -16,6 +16,8 @@
 
 [命令行](https://kamomechan.github.io/front-end/client-side-tools/command-line)
 
+[软件包管理基础](https://kamomechan.github.io/front-end/client-side-tools/package-management)
+
 ## 进阶内容
 
 loading...
