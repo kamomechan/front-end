@@ -40,3 +40,54 @@ npm 不是唯一的选择，你也可以通过[Microsoft Azure](https://azure.mi
 ## 使用软件包生态系统
 
 [Parcel](https://parceljs.org/) 是开发阶段常用到的一个命令行工具，可以监测我们的代码以查找对依赖的调用，并自动安装对应的依赖。它还可以自动构建我们的代码
+
+### 创建一个 npm 包
+
+首先，创建一个目录来存储实验应用
+
+```bash
+mkdir parcel-experiment
+cd parcel-experiment
+```
+
+接着初始化 npm 包，这会生成一个配置文件`package.json`,用来存储配置信息，以防我们以后想要重新创建此环境，甚至将包发布到 npm 仓库
+
+```bash
+npm init
+```
+
+你现在将被要求回答一些问题；npm 将根据答案创建一个默认的 `package.json` 文件：
+
+- `name`：用于标识应用的名称。只需按下 Return 接受默认值 `parcel-experiment`。
+
+- `version`：应用的起始版本号。同样，只需按下 Return 接受默认值 `1.0.0`。
+
+- `description`：应用目的的简要描述。输入一些非常简单的东西，例如“一个简单的 npm 包，用于学习使用 npm”，然后按下 Return。
+
+- `entry point`：这将是应用的入口 JavaScript 文件。默认的 `index.js` 对这个实验项目是可以的——按下 Return。
+
+- `test command`、`git repository` 和 `keywords`：按下 Return 以将它们暂时留空。
+
+- `author`：项目的作者。输入你自己的姓名，然后按下 Return。
+
+- `license`：要发布软件包的许可证。按下 Return 来接受默认值。
+
+按下 Return 一次以接受这些设置。
+
+### 安装 parcel
+
+本地安装 Parcel：
+
+```bash
+npm install parcel-bundler
+```
+
+完成所有准备工作，开始进行现代客户端开发(意味着使用构建工具来获得更好的开发体验)，现在查看 `package.json`文件，可以看到 npm 添加了一个新字段——dependencies：
+
+```json
+"dependencies": {
+  "parcel-bundler": "^1.12.4"
+}
+```
+
+本地安装的优点是通过移动代码库，在另一台设备上运行`npm install` 能够自动配置安装相同的环境，缺点是只能在`parcel-experiment`目录下运行`parcel`依赖，但是利大于弊
