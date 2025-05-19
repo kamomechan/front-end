@@ -91,3 +91,72 @@ npm install parcel-bundler
 ```
 
 本地安装的优点是通过移动代码库，在另一台设备上运行`npm install` 能够自动配置安装相同的环境，缺点是只能在`parcel-experiment`目录下运行`parcel`依赖，但是利大于弊
+
+### 设置示例程序
+
+parcel 需要一个  `index.html` 和一个`index.js`文件来处理，除此之外对你如何构建项目没有任何意见，其他工具可能有所不同
+
+现在我们开始创建 `index.html`文件,并输入以下内容
+
+```html
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>My test page</title>
+  </head>
+  <body>
+    <script src="./index.js"></script>
+  </body>
+</html>
+```
+
+接着创建`index.js`文件即可
+
+### 尝试使用 parcel
+
+运行 parcel 工具
+
+```bash
+parcel index.html
+```
+
+在终端运行以上命令将会输出以下内容
+
+```bash
+Server running at http://localhost:1234
+✨  Built in 193ms.
+```
+
+> 如果返回`parcel: command not found` 类型错误，应尝试使用 npx 运行上面的命令，`npx parcel index.html`
+
+现在我们可以享受到 JavaScript 包生态系统的好处，parcel 会在后台运行一个本地 web 服务器，打开`http://localhost:1234`即可看到，当我们更改代码时，parcel 会自动构建并刷新 web 服务器，以便我们看到实时的更改
+
+我们开始添加一些页面内容来显示相对时间，比如几天前，几小时前等等。可以通过`date-fns`包下的`dateDistanceToNow()`方法来实现
+
+在`index.js`包下添加以下内容
+
+```javascript
+import { formatDistanceToNow } from "date-fns";
+
+const date = "1996-09-13 10:00:00";
+document.body.textContent = `${formatDistanceToNow(new Date(date))} ago`;
+```
+
+回到`http://localhost:1234`，你将看到距今已经多久了
+
+这个代码的不可思议之处在于我们使用了`date-fns`包的`dateDistanceToNow()`方法，而我们并没有手动安装这个包，这意味着 Parcel 发现你需要这个模块，因此在 `npmjs.com` 仓库中搜索并自动为我们本地安装了它。为了证实这一点可以打开`package.json`文件，这时可以看到`dependencies`字段已经被更新了
+
+```json
+"dependencies": {
+    "date-fns": "^4.1.0",
+    "parcel-bundler": "^1.12.5"
+}
+```
+
+运行`parcel`命令，会生成许多新文件
+
+- `node_modules`：Parcel 和 date-fns 的依赖文件。
+- `dist`：发布目录——这些是 Parcel 自动生成的打包和压缩文件，它们是 `localhost:1234` 提供的文件。这些是你在将网站发布到公共网络时上传到 Web 服务器的文件。
+
+只要我们知道包的名称，我们就可以在代码中使用它，Parcel 会自动去获取并安装（实际上是“复制”）该包到我们的本地目录（在 `node_modules` 下）。
