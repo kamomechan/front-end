@@ -149,8 +149,8 @@ document.body.textContent = `${formatDistanceToNow(new Date(date))} ago`;
 
 ```json
 "dependencies": {
-    "date-fns": "^4.1.0",
-    "parcel-bundler": "^1.12.5"
+  "date-fns": "^2.12.0",
+  "parcel-bundler": "^1.12.4"
 }
 ```
 
@@ -160,3 +160,70 @@ document.body.textContent = `${formatDistanceToNow(new Date(date))} ago`;
 - `dist`：发布目录——这些是 Parcel 自动生成的打包和压缩文件，它们是 `localhost:1234` 提供的文件。这些是你在将网站发布到公共网络时上传到 Web 服务器的文件。
 
 只要我们知道包的名称，我们就可以在代码中使用它，Parcel 会自动去获取并安装（实际上是“复制”）该包到我们的本地目录（在 `node_modules` 下）。
+
+### 为生产环境构建我们的代码
+
+此代码还没准备好用于生产环境。大部分构建工具包括**生产环境**和**开发环境**，重要的区别在于，生产环境并不需要很多在开发阶段需要的功能，因此这些功能将在生产环境中被剥离，例如“模块热替换”、“实时重新加载”和“未压缩和注释的源代码”，但这些都是常见的 Web 开发功能，在开发阶段非常有用，但在生产中它们并不是很有用。在生产中，它们只会令你的网站变得臃肿。
+
+使用 `Ctrl` + `C`停止之前的 Parcel 命令。
+
+parcel 提供了一个额外的命令用于生成适合发布的文件，使用`build`选项生成捆绑包
+
+```bash
+parcel build index.html
+```
+
+应该能看到以下的输出
+
+```bash
+✨  Built in 9.35s.
+
+dist/my-project.fb76efcf.js.map    648.58 KB     64ms
+dist/my-project.fb76efcf.js        195.74 KB    8.43s
+dist/index.html                        288 B    806ms
+```
+
+同样，我们的构建产物在 `dist` 目录。
+
+> 如果这时你输出内容报错，那么可能是`date-fns`包的最新版本与`parcel-bundler`版本不兼容，那么应该修改版本号和上方展示的版本号相同才行，最后运行`npm install`自动更换依赖版本(别问我怎么知道的，因为我因为这个原因报错，最后解决啦><)
+
+### 减小应用的文件大小
+
+当我们使用别人的软件包带来便利的同时，我们也会看到 JavaScript 的捆绑包`my-project.fb76efcf.js`的大小为 195kb，考虑到它只进行了计算并打印了一行文本，显得体积非常大，这是由于我们只使用了`date-fns`这个包里面的一个方法，捆绑包中却包含了整个库
+
+如果我们避免本地使用任何库，并用 `<script src="">` 加载托管的 `date-fns` 库，那么会发生同样的事，当我们的示例页面在浏览器中加载时，将会下载整个库。
+
+然而，我们可以要求软件对我们的代码进行检查，并在构建捆绑包时只包含我们实际使用的函数(方法)，这个过程称为**摇树优化**
+
+通过摇树优化减少了文件体积，使我们的应用程序尽可能快的加载，不同工具以不用方式进行摇树优化
+
+尽管工具日新月异，但目前有三个比较流行的打包工具可以将源代码构建为捆绑包
+
+- RollUp 工具提供摇树优化和代码拆分作为其核心特性。
+- Webpack 需要“一些”配置（尽管“一些”可能低估了一些开发人员的 Webpack 配置的复杂性）。
+- 在 Parcel（Parcel 2 之前）的情况下，需要一个特殊的标志——`--experimental-scope-hoisting`——来进行摇树优化构建。
+
+让我们运行以下命令，让 parcel 使用摇树优化选项
+
+```bash
+parcel build index.html --experimental-scope-hoisting
+```
+
+我们可以看到有很大的不同
+
+```bash
+✨  Built in 7.87s.
+
+dist/my-project.86f8a5fc.js    10.34 KB    7.17s
+dist/index.html                   288 B    753ms
+```
+
+现在捆绑包大小约为 10K。看起来好多了。
+
+如果我们需要把这个项目放到服务器部署，只需发布`dist`目录中的文件，parcel 已自动更改文件名，建议查看`dist/index.html`文件，以便看到具体更改
+
+> **备注：** 在撰写本文时，Parcel 2 尚未发布。但是，当它发布时，这些命令仍将有效，因为 Parcel 的作者已经聪明地将旧版本的 Parcel 重新命名。要安装 Parcel 1.x，你必须安装 `parcel-bundler`，而 Parcel 2.x 被称为 `parcel`。
+
+现在有很多工具可用，JavaScript 软件包生态系统正在以前所未有的速度增长，这有利有弊。不断进行改进，选择，无论是好是坏，都在不断增加。面对眼花缭乱的工具选择，可能最重要的一课是了解你选择的工具能够做什么。
+
+## 包管理器客户端的简要指南
