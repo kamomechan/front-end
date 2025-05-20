@@ -263,3 +263,93 @@ yarn add date-fns
 我们之前还看到了 `npm install` 的操作。它将根据`package.json`文件下载所有依赖项直接添加到工作目录下的名为 `node_modules` 的子目录中。
 
 默认情况下，此命令将安装 `date-fns` 的最新版本，但你也可以进行控制。你可以尝试安装 `date-fns@1`，这将为你提供最新的 1.x 版本（目前为 1.30.1）。或者你可以尝试安装 `date-fns@^2.3.0`，这意味着安装 2.3.0 之后或包括 2.3.0 的最新版本（在撰写本文时为 2.8.1）。
+
+### 更新依赖
+
+```bash
+npm update
+yarn upgrade
+```
+
+此命令将查看当前安装的依赖项并更新它们（如果有可用的更新），更新的范围由软件包中指定的版本号来确定。
+
+范围由依赖项版本号中的符号指定，例如 `date-fns@^2.0.1`——在这种情况下，插入符号 `^` 表示所有的次要版本和补丁版本，从 2.0.1 开始一直到 3.0.0 之前。
+
+版本号的确定是通过名为 [semver](https://semver.org/) 的系统实现的。从文档中看起来可能有些复杂，但是只考虑摘要信息并将版本表示为 `MAJOR.MINOR.PATCH`，例如 2.0.1 表示主版本 2 和补丁版本 1，可以简化这个系统。一个测试 semver 值的绝佳方法是使用 [semver 计算器](https://semver.npmjs.com/)。
+
+请记住，`npm update` 不会将依赖项升级到超出 `package.json` 中限定的范围——要执行此操作，你需要专门安装那个版本。
+
+### 漏洞审查
+
+```bash
+npm audit
+yarn audit
+```
+
+这个命令将检查你项目的所有依赖树，并使用漏洞数据库检查你正在使用的特定版本，如果你的项目中存在潜在的漏洞包，则会通知你。
+
+想要了解有关漏洞的更多信息，可以参考 [Snyk 项目](https://snyk.io/)，该项目涵盖了 JavaScript 软件包和其他编程语言。
+
+### 检查一个依赖
+
+```bash
+npm ls date-fns
+yarn why date-fns
+```
+
+这个命令会显示依赖已安装的版本号，并如何在项目中使用的。可能是另一个软件包导入了`date-fns`,也可能是你的项目中有多个版本的软件包（这在使用 [Lodash](https://lodash.com/) 软件包时经常出现，因为它太有用了）。
+
+可能包管理器尽最大努力对软件包去重，但你或许需要调查了解已安装的版本
+
+## 创建自己的命令
+
+软件包管理器还支持创建自己的命令并在命令行执行他们，例如我们可以创建以下命令
+
+```bash
+npm run dev
+# 或 yarn run dev
+```
+
+这将运行自定义脚本以开发模式启动我们的项目，实际上所有项目我们都会包含这个命令，因为本地开发环境通常与在生产环境中运行的方式略有不同
+
+如果在先前的`parcel-experiment`项目中运行会出现`dev 脚本丢失`错误，这是由于软件包管理器查找不到`dev`命令，但我们可以通过`package.json`文件中的`scripts`属性自定义命令
+
+Parcel 可以使用 `parcel serve filename.html` 命令运行开发服务器，我们希望在开发过程中经常使用它。
+
+因此，让我们在 `package.json` 中创建一个自定义缩写命令——“dev”。
+
+如果你按照之前的教程操作，你应该在 parcel-experiment 目录中有一个 `package.json` 文件。打开它，它的 `scripts` 应该如下所示：
+
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+},
+```
+
+更新它，使其看起来像这样，并保存文件：
+
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "dev": "parcel serve index.html"
+},
+```
+
+我们已经将自定义的 `dev` 命令添加为 npm 脚本命令。
+
+现在在终端中尝试运行以下命令，确保你在 `parcel-experiment` 目录中：
+
+```bash
+ npm run dev
+```
+
+这将启动 Parcel 并在本地开发服务器上提供你的 `index.html` ，就像我们之前看到的一样：
+
+```bash
+Server running at http://localhost:1234
+✨  Built in 5.48s.
+```
+
+此外，npm 和 yarn 会自动查找本地安装的工具，如果没有才会查找全局安装的工具。
+
+你可以在`scripts`属性中自定义自己的命令，通常可以把复杂的命令简化
