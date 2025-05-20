@@ -227,3 +227,39 @@ dist/index.html                   288 B    753ms
 现在有很多工具可用，JavaScript 软件包生态系统正在以前所未有的速度增长，这有利有弊。不断进行改进，选择，无论是好是坏，都在不断增加。面对眼花缭乱的工具选择，可能最重要的一课是了解你选择的工具能够做什么。
 
 ## 包管理器客户端的简要指南
+
+本教程使用了 npm 包管理器，还有一些其他选择
+
+- npm 详见 [npmjs.org](https://www.npmjs.com/)
+- pnpm 详见 [pnpm.js.org](https://pnpm.js.org/)
+- Yarn 详见 [yarnpkg.com](https://yarnpkg.com/)
+
+pnpm 和 npm 非常相似，pnpm 旨在和 npm 提供相同的参数，却用不同的下载和存储软件包方式，以减少总磁盘占用
+
+下面的示例中，npm 替换成 pnpm 仍可以正常运行
+
+对比 npm，yarn 安装依赖通常被认为更快
+
+> **备注：** 虽然 npm 包管理器与 npm 仓库共享相同的名称，但不需要使用 npm 包管理器来从 npm 仓库安装软件包。pnpm 和 Yarn 可以使用与 npm 相同的 `package.json` 格式，并且可以安装来自 npm 和其他软件包仓库的任何软件包。
+
+接下来，回顾一下包管理器的常见操作
+
+### 初始化一个项目
+
+```bash
+npm init
+yarn init
+```
+
+这将通过一些问题来描述你的项目(名称、许可证、描述等)，并生成一个`package.json`文件，其中包含项目和依赖的元信息
+
+### 安装依赖
+
+```bash
+npm install date-fns
+yarn add date-fns
+```
+
+我们之前还看到了 `install` 的操作。它将 `date-fns` 软件包及其所有依赖项直接添加到工作目录下的名为 `node_modules` 的子目录中。
+
+默认情况下，此命令将安装 `date-fns` 的最新版本，但你也可以进行控制。你可以尝试安装 `date-fns@1`，这将为你提供最新的 1.x 版本（目前为 1.30.1）。或者你可以尝试安装 `date-fns@^2.3.0`，这意味着安装 2.3.0 之后或包括 2.3.0 的最新版本（在撰写本文时为 2.8.1）。
