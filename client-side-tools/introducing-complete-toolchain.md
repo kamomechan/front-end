@@ -210,3 +210,82 @@ npm install --save-dev eslint prettier babel-eslint
 我们需要对工具进行一些的配置才能正常工作，这不是必要的，但是代码检查工具可以监测一些潜在错误，正确配置工具是非常有用的，特别是 ESLint。
 
 ### 配置我们的工具
+
+切换到项目根目录，通过添加配置文件，以配置我们的工具，即`prettier`和`eslint`，一般配置文件格式为`json`(我们的工具以及许多其他工具也支持`yaml`格式，如果你习惯它，也可以进行切换)
+
+1. 创建名为`.prettierrc.json`的文件，以配置 prettier 工具
+
+   ```bash
+   touch .prettierrc.json
+   ```
+
+2. 将`.prettierrc.json`文件设置以下内容
+
+   ```json
+   {
+     "singleQuote": true,
+     "trailingComma": "es5"
+   }
+   ```
+
+   意味着当你格式化 JavaScript 代码后，为所有带引号的值添加单引号，并不适用追随逗号（这是 ECMAScript 的新特性，在旧版浏览器中这会导致错误）。你可以在 [Prettier 文档中](https://prettier.io/docs/en/configuration.html) 找到更多关于配置 Prettier 的信息。
+
+3. 创建另一个名为 `.eslintrc.json` 的文件，并将其设置为以下内容：
+
+   ```json
+   {
+     "env": {
+       "es6": true,
+       "browser": true
+     },
+     "extends": "eslint:recommended",
+     "parserOptions": {
+       "ecmaVersion": 6,
+       "sourceType": "module"
+     },
+     "rules": {
+       "no-console": 0
+     }
+   }
+   ```
+
+   上述 ESLint 配置表示我们想使用"推荐的"的 ESLint 设置，我们将允许使用 ES6 特性（例如 map() 或 Set()），我们可以使用模块的 import 语句，并且允许使用 console.log()。
+
+4. 由于我们在 JavaScript 文件中使用了 react jsx 语法，这会导致 eslint 报错，因此我们需要添加更多的配置以支持 jsx 特性。
+
+   设置`.eslintrc.json`文件为以下内容
+
+   ```json
+   {
+     "env": {
+       "es6": true,
+       "browser": true
+     },
+     "extends": ["eslint:recommended", "plugin:react/recommended"],
+     "parserOptions": {
+       "ecmaVersion": 6,
+       "sourceType": "module",
+       "ecmaFeatures": {
+         "jsx": true
+       }
+     },
+     "plugins": ["react"],
+     "rules": {
+       "semi": "error",
+       "no-console": 0,
+       "react/jsx-uses-vars": "error"
+     }
+   }
+   ```
+
+   由于配置使用了一个“react”插件，因此需要安装此插件为 eslint 的代码检查过程提供代码
+
+5. 在项目根目录运行以下命令
+   ```bash
+   npm install --save-dev eslint-plugin-react
+   ```
+   这里有一个完整的 [ESLint 规则列表](https://eslint.org/docs/rules/)，你可以根据自己的需求进行调整和配置，许多公司和团队已发布了自己的 [ESLint 配置](https://www.npmjs.com/search?q=keywords:eslintconfig)，这对于选择一个适合自己标准的配置有时可能有用，可以帮助我们获得灵感。不过需要提醒的是：ESLint 配置是一个非常深的“兔子洞”问题！
+
+到此为止，我们的开发环境设置完成了。现在，最后，我们（几乎）准备好编写代码了。
+
+## 构建和转化工具
